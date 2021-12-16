@@ -7,7 +7,7 @@
  * @param roleName the name of the role
  * @param sidInputBoxId id of the <input type="text"> that contains the sid
  */
-function assignSid(roleType, roleName, sidInputBoxId) {
+function assignSidDelegate(itemUrl, roleType, roleName, sidInputBoxId) {
     const formData = new FormData();
     formData.append('sid', document.getElementById(sidInputBoxId).value);
     formData.append('roleName', roleName);
@@ -16,7 +16,7 @@ function assignSid(roleType, roleName, sidInputBoxId) {
         throw  new Error('Unknown Role Type');
     }
 
-    const url = `${rootURL}/folder-auth/assignSidTo${roleType[0].toUpperCase()}${roleType.substring(1)}Role`;
+    const url = `${itemUrl}/assignSidTo${roleType[0].toUpperCase()}${roleType.substring(1)}Role`;
     const request = new XMLHttpRequest();
     request.open('POST', url);
     request.onload = () => {
@@ -45,7 +45,7 @@ function assignSid(roleType, roleName, sidInputBoxId) {
  * @param roleName the name of the role
  * @param sidInputBoxId id of the <input type="text"> that contains the sid
  */
-function removeSid(roleType, roleName, sidInputBoxId) {
+function removeSidDelegate(itemUrl, roleType, roleName, sidInputBoxId) {
     const formData = new FormData();
     formData.append('sid', document.getElementById(sidInputBoxId).value);
     formData.append('roleName', roleName);
@@ -54,7 +54,7 @@ function removeSid(roleType, roleName, sidInputBoxId) {
         throw  new Error('Unknown Role Type');
     }
 
-    const url = `${rootURL}/folder-auth/removeSidFrom${roleType[0].toUpperCase()}${roleType.substring(1)}Role`;
+    const url = `${itemUrl}/removeSidFrom${roleType[0].toUpperCase()}${roleType.substring(1)}Role`;
     const request = new XMLHttpRequest();
     request.open('POST', url);
     request.onload = () => {

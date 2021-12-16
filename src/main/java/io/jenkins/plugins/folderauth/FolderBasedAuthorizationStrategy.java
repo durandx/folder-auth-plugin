@@ -6,11 +6,13 @@ import hudson.Extension;
 import hudson.model.AbstractItem;
 import hudson.model.Computer;
 import hudson.model.Descriptor;
+import hudson.model.Item;
 import hudson.model.Job;
 import hudson.security.ACL;
 import hudson.security.AuthorizationStrategy;
 import hudson.security.Permission;
 import hudson.security.PermissionGroup;
+import hudson.security.PermissionScope;
 import hudson.security.SidACL;
 import io.jenkins.plugins.folderauth.acls.GenericAclImpl;
 import io.jenkins.plugins.folderauth.acls.GlobalAclImpl;
@@ -36,6 +38,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+
 /**
  * An {@link AuthorizationStrategy} that controls access to {@link com.cloudbees.hudson.plugins.folder.AbstractFolder}s
  * through {@link FolderRole}s, to {@link Computer}s through {@link AgentRole}s. Also provides global permissions
@@ -55,7 +58,10 @@ public class FolderBasedAuthorizationStrategy extends AuthorizationStrategy {
     private final Set<AgentRole> agentRoles;
     private final Set<GlobalRole> globalRoles;
     private final Set<FolderRole> folderRoles;
+    
 
+	static final Permission DELEGATE_FOLDER = new Permission(Item.PERMISSIONS, "DelegateFolder", Messages._FolderBasedAuthorizationStrategy_DelegateFolder(), Permission.UPDATE, PermissionScope.ITEM);
+    
     /**
      * An {@link ACL} that works only on {@link #globalRoles}.
      * <p>

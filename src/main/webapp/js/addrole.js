@@ -56,6 +56,32 @@ const addFolderRole = () => {
 
 // noinspection JSUnusedGlobalSymbols
 /**
+ * Adds a Folder Role
+ */
+const addFolderRoleDelegate = (itemUrl, folderName) => {
+    const roleName = document.getElementById('folderRoleName').value;
+    if (!roleName || roleName.length < 3) {
+        alert('Please enter a valid name for the role to be added');
+        return;
+    }
+
+    const response = {
+        name: roleName,
+        permissions: document.getElementById('folder-permission-select').getValue(),
+        folderNames: [folderName],
+    };
+
+    if (!response.permissions || response.permissions.length <= 0) {
+        alert('Please select at least one permission');
+        return;
+    }
+
+    //sendPostRequest(`${rootURL}/delegate/addFolderRole`, response);
+    sendPostRequest(`${itemUrl}/addFolderRole`, response);
+};
+
+// noinspection JSUnusedGlobalSymbols
+/**
  * Adds an agent Role
  */
 const addAgentRole = () => {

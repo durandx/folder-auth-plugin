@@ -103,6 +103,19 @@ public final class PermissionWrapper implements Comparable<PermissionWrapper> {
         }
     }
 
+
+    /**
+     * Convenience method to wrap {@link Permission} into {@link PermissionWrapper}.
+     *
+     * @param permission permission to be wrapped up
+     * @return a {@link PermissionWrapper} for the {@code permission}
+     */
+    @Nonnull
+    public static PermissionWrapper wrapPermission(Permission permission) {
+        return new PermissionWrapper(permission.getId());
+    }
+    
+    
     /**
      * Convenience method to wrap {@link Permission}s into {@link PermissionWrapper}s.
      *
